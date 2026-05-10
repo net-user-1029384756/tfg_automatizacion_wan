@@ -13,7 +13,7 @@ _"Automatización de la configuración de racks de red y equipos cliente mediant
 El objetivo es automatizar la configuración y despliegue de una ```WAN``` de routers, switches
 (```MikroTik```, ```Cisco```), equipos cliente (```Windows 11```, ```Debian```) y servidores (```Windows Server```, ```Ubuntu Server```) usando:
 
-- Python 3.14 con POO, Netmiko, Paramiko
+- Python 3.12 con POO, Netmiko, Paramiko
 - Ansible Core (desde WSL) con playbooks declarativos
 - Validación en GNS3 con MikroTik CHR 7.21 y Cisco IOSv
 - Entorno anfitrión: Windows 11 Pro + VirtualBox

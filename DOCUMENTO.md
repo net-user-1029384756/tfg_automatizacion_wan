@@ -34,7 +34,7 @@
 
 ### 5. Requisitos previos
 - Hardware: CPU con VT-x/AMD-V, 16GB RAM DDR4/5, SSD NVMe, tarjeta de red.
-- Software: Windows 11 Pro, VirtualBox, GNS3, WSL2, Python 3.14, Ansible Core, VS Code.
+- Software: Windows 11 Pro, VirtualBox, GNS3, WSL2, Python 3.12, Ansible Core, VS Code.
 - Justificar cada requisito brevemente.
 
 ### 6. Enumeración y desarrollo de las etapas

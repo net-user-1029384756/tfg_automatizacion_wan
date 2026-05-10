@@ -1,0 +1,25 @@
+# Inventario de dispositivos para automatización.
+#
+# Las contraseñas y usuarios sensibles deben referenciarse como `env:NOMBRE_VAR`
+# y definirse en un fichero `.env` (no versionado).
+
+devices:
+  - hostname: R1
+    type: mikrotik
+    ip_address: 192.168.99.10
+    username: env:TFG_MIKROTIK_USER
+    password: env:TFG_MIKROTIK_PASS
+
+  # Plantillas para iteraciones siguientes (descomentar cuando se levanten):
+  #
+  # - hostname: R2
+  #   type: mikrotik
+  #   ip_address: 192.168.99.11
+  #   username: env:TFG_MIKROTIK_USER
+  #   password: env:TFG_MIKROTIK_PASS
+  #
+  # - hostname: SW1
+  #   type: mikrotik
+  #   ip_address: 192.168.99.20
+  #   username: env:TFG_MIKROTIK_USER
+  #   password: env:TFG_MIKROTIK_PASS

@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+
+# Tests / linters
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Credenciales
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# GNS3 (estado de ejecución, no la topología en sí)
+topology/project-files/
+topology/snapshots/
+*.gns3_temporary
