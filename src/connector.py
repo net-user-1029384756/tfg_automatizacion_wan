@@ -9,7 +9,8 @@ si se produce un error durante la ejecución de comandos.
 from __future__ import annotations
 
 import logging
-from typing import List, Optional
+import time
+from typing import List
 
 from netmiko import ConnectHandler
 from netmiko.exceptions import (
@@ -75,7 +76,28 @@ class DeviceConnector:
             self.device.username,
         )
         try:
-            self._connection = ConnectHandler(**params)
+            self._connection = ConnectHandler(**params, auto_connect=False)
+            try:
+                self._connection.establish_connection()
+            except Exception as exc:
+                if "Pattern not detected" in str(exc):
+                    logger.debug(
+                        "[%s] Netmiko atascado en el prompt inicial. Rescatando sesión...",
+                        self.device.hostname,
+                    )
+                    # 1. Rechazamos la licencia (por si acaso)
+                    self._connection.write_channel("n\r\n")
+                    time.sleep(1)
+                    # 2. Cancelamos el cambio de contraseña obligatorio
+                    self._connection.write_channel("\x03")  # Ctrl+C
+                    time.sleep(1)
+                    # 3. Limpiamos la línea
+                    self._connection.write_channel("\r\n")
+                    time.sleep(1)
+                    # 4. Le decimos a Netmiko que fije el prompt ahora que el CLI está limpio
+                    self._connection.set_base_prompt()
+                else:
+                    raise  # Si el error es otro (ej. credenciales malas), que falle
         except NetmikoAuthenticationException as exc:
             raise DeviceConnectionError(
                 f"Fallo de autenticación contra {self.device.hostname}"
@@ -84,6 +106,10 @@ class DeviceConnector:
             raise DeviceConnectionError(
                 f"Timeout al conectar con {self.device.hostname} "
                 f"({self.device.ip_address})"
+            ) from exc
+        except Exception as exc:
+            raise DeviceConnectionError(
+                f"Error inesperado al conectar con {self.device.hostname}: {exc}"
             ) from exc
 
     def disconnect(self) -> None:

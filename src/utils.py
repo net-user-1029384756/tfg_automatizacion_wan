@@ -36,13 +36,13 @@ def update_env_file(key: str, value: str, env_path: str | Path = Path(".env")) -
     if env_path.is_file():
         for line in env_path.read_text(encoding="utf-8").splitlines():
             if line.split("=", 1)[0].strip() == key:
-                lines.append(f"{key}={value}")
+                lines.append(f'{key}="{value}"')
                 updated = True
             else:
                 lines.append(line)
 
     if not updated:
-        lines.append(f"{key}={value}")
+        lines.append(f'{key}="{value}"')
 
     env_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -78,6 +78,16 @@ def _resolve_secret(value: str) -> str:
     return value
 
 
+def load_mac_map(path: str | Path) -> Dict[str, str]:
+    """Carga mac_map.yml y devuelve {MAC_EN_MAYÚSCULAS: hostname}."""
+    path = Path(path)
+    if not path.is_file():
+        raise FileNotFoundError(f"Mapa de MACs no encontrado: {path}")
+    with path.open("r", encoding="utf-8") as fh:
+        data = yaml.safe_load(fh) or {}
+    return {mac.upper(): hostname for mac, hostname in data.get("mac_map", {}).items()}
+
+
 def load_inventory(path: str | Path) -> List[NetworkDevice]:
     """
     Carga un inventario YAML y devuelve instancias de dispositivo.
@@ -89,7 +99,7 @@ def load_inventory(path: str | Path) -> List[NetworkDevice]:
             type: mikrotik
             ip_address: 192.168.99.10
             username: admin
-            password: env:TFG_MIKROTIK_PASS
+            password: env:Rx_PASS
 
     :param path: Ruta al fichero YAML.
     :return: Lista de ``NetworkDevice``.

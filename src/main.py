@@ -64,7 +64,7 @@ def ping_devices(devices: List[NetworkDevice]) -> int:
 def _parse_args(argv: List[str] | None = None) -> argparse.Namespace:
     """Define y procesa los argumentos de línea de comandos."""
     parser = argparse.ArgumentParser(
-        prog="tfg-wan",
+        prog="wan",
         description="Automatización de la configuración de routers/switches.",
     )
     parser.add_argument(

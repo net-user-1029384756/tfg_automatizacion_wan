@@ -3,6 +3,8 @@ Módulo de modelos para la automatización de infraestructura de red.
 Define la jerarquía de clases para dispositivos MikroTik y Cisco.
 """
 
+from __future__ import annotations
+
 import re
 from abc import ABC, abstractmethod
 from typing import TYPE_CHECKING, Any, Dict

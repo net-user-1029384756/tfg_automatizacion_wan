@@ -10,11 +10,7 @@
     "scene_height": 1000,
     "scene_width": 2000,
     "show_grid": false,
-<<<<<<< HEAD
-    "show_interface_labels": false,
-=======
     "show_interface_labels": true,
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
     "show_layers": false,
     "snap_to_grid": false,
     "supplier": null,
@@ -24,9 +20,6 @@
         "links": [
             {
                 "filters": {},
-<<<<<<< HEAD
-                "link_id": "b098557b-1ae5-427f-bbff-b0d4151ab244",
-=======
                 "link_id": "2a1c5e92-df80-4057-8cc3-0991f91b8973",
                 "link_style": {
                     "color": "#000000",
@@ -52,8 +45,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e1",
-                            "x": 21,
-                            "y": -16
+                            "x": 38,
+                            "y": -21
                         },
                         "node_id": "083973d9-e2cf-4b55-a744-54fc11b03879",
                         "port_number": 0
@@ -184,8 +177,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e4",
-                            "x": 72,
-                            "y": 28
+                            "x": 74,
+                            "y": 21
                         },
                         "node_id": "083973d9-e2cf-4b55-a744-54fc11b03879",
                         "port_number": 0
@@ -208,7 +201,6 @@
             {
                 "filters": {},
                 "link_id": "705331a3-6de3-43ba-9512-a87a3f5505cd",
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 "link_style": {
                     "color": "#000000",
                     "type": 1,
@@ -220,21 +212,12 @@
                         "label": {
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
-<<<<<<< HEAD
-                            "text": "OpenVPN TAP-Windows6",
-                            "x": 127,
-                            "y": -1
-                        },
-                        "node_id": "75d3e664-74bc-40f4-93aa-e42c3dc03c01",
-                        "port_number": 1
-=======
                             "text": "eth0",
-                            "x": 85,
-                            "y": 74
+                            "x": 35,
+                            "y": 71
                         },
                         "node_id": "34eda357-addf-4bc9-aee9-8fcb8b51a45a",
                         "port_number": 0
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                     },
                     {
                         "adapter_number": 0,
@@ -242,12 +225,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e0",
-<<<<<<< HEAD
-                            "x": 1,
-                            "y": 46
-=======
-                            "x": 42,
-                            "y": -24
+                            "x": 5,
+                            "y": -26
                         },
                         "node_id": "67dab93f-9ca7-4f3b-bc06-888e93143e8a",
                         "port_number": 0
@@ -270,8 +249,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e1",
-                            "x": 68,
-                            "y": -5
+                            "x": 62,
+                            "y": -35
                         },
                         "node_id": "67dab93f-9ca7-4f3b-bc06-888e93143e8a",
                         "port_number": 0
@@ -282,17 +261,14 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e0",
-                            "x": 0,
-                            "y": 43
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
+                            "x": -34,
+                            "y": 19
                         },
                         "node_id": "4d36b14b-3a4d-4240-b3e0-4161cad4df86",
                         "port_number": 0
                     }
                 ],
                 "suspend": false
-<<<<<<< HEAD
-=======
             },
             {
                 "filters": {},
@@ -309,8 +285,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e2",
-                            "x": 73,
-                            "y": 3
+                            "x": 116,
+                            "y": -29
                         },
                         "node_id": "67dab93f-9ca7-4f3b-bc06-888e93143e8a",
                         "port_number": 0
@@ -345,8 +321,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e3",
-                            "x": 75,
-                            "y": 18
+                            "x": 66,
+                            "y": 37
                         },
                         "node_id": "67dab93f-9ca7-4f3b-bc06-888e93143e8a",
                         "port_number": 0
@@ -357,8 +333,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e0",
-                            "x": -6,
-                            "y": 19
+                            "x": -27,
+                            "y": 13
                         },
                         "node_id": "083973d9-e2cf-4b55-a744-54fc11b03879",
                         "port_number": 0
@@ -381,8 +357,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e4",
-                            "x": 75,
-                            "y": 17
+                            "x": 101,
+                            "y": 6
                         },
                         "node_id": "67dab93f-9ca7-4f3b-bc06-888e93143e8a",
                         "port_number": 0
@@ -393,8 +369,8 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e0",
-                            "x": -6,
-                            "y": 20
+                            "x": -37,
+                            "y": -9
                         },
                         "node_id": "69947375-54d0-49a6-8111-698e8c2fca5b",
                         "port_number": 0
@@ -465,15 +441,14 @@
                             "rotation": 0,
                             "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                             "text": "e4",
-                            "x": 22,
-                            "y": 60
+                            "x": 40,
+                            "y": 52
                         },
                         "node_id": "69947375-54d0-49a6-8111-698e8c2fca5b",
                         "port_number": 0
                     }
                 ],
                 "suspend": false
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
             }
         ],
         "nodes": [
@@ -490,11 +465,7 @@
                     "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                     "text": "R1",
                     "x": 20,
-<<<<<<< HEAD
-                    "y": -25
-=======
                     "y": 18
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 },
                 "locked": false,
                 "name": "R1",
@@ -547,13 +518,8 @@
                 "symbol": ":/symbols/classic/router.svg",
                 "template_id": "b41f555d-3f6f-4249-8042-624da00f1731",
                 "width": 66,
-<<<<<<< HEAD
-                "x": -201,
-                "y": -175,
-=======
                 "x": -228,
                 "y": -222,
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 "z": 1
             },
             {
@@ -568,13 +534,8 @@
                     "rotation": 0,
                     "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                     "text": "R2",
-<<<<<<< HEAD
-                    "x": 20,
-                    "y": -25
-=======
                     "x": 23,
                     "y": 21
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 },
                 "locked": false,
                 "name": "R2",
@@ -627,13 +588,8 @@
                 "symbol": ":/symbols/classic/router.svg",
                 "template_id": "b41f555d-3f6f-4249-8042-624da00f1731",
                 "width": 66,
-<<<<<<< HEAD
-                "x": -24,
-                "y": -157,
-=======
                 "x": 70,
                 "y": -233,
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 "z": 1
             },
             {
@@ -648,13 +604,8 @@
                     "rotation": 0,
                     "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                     "text": "R3",
-<<<<<<< HEAD
                     "x": 20,
-                    "y": -25
-=======
-                    "x": 18,
-                    "y": 19
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
+                    "y": 20
                 },
                 "locked": false,
                 "name": "R3",
@@ -707,13 +658,8 @@
                 "symbol": ":/symbols/classic/router.svg",
                 "template_id": "b41f555d-3f6f-4249-8042-624da00f1731",
                 "width": 66,
-<<<<<<< HEAD
-                "x": -159,
-                "y": -36,
-=======
-                "x": -225,
-                "y": 9,
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
+                "x": -232,
+                "y": 14,
                 "z": 1
             },
             {
@@ -728,13 +674,8 @@
                     "rotation": 0,
                     "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                     "text": "R4",
-<<<<<<< HEAD
-                    "x": 20,
-                    "y": -25
-=======
                     "x": 22,
                     "y": 18
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 },
                 "locked": false,
                 "name": "R4",
@@ -787,13 +728,8 @@
                 "symbol": ":/symbols/classic/router.svg",
                 "template_id": "b41f555d-3f6f-4249-8042-624da00f1731",
                 "width": 66,
-<<<<<<< HEAD
-                "x": 41,
-                "y": -4,
-=======
                 "x": 68,
                 "y": 12,
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 "z": 1
             },
             {
@@ -808,13 +744,8 @@
                     "rotation": 0,
                     "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                     "text": "SW1",
-<<<<<<< HEAD
-                    "x": 17,
-                    "y": -25
-=======
                     "x": 6,
                     "y": 11
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 },
                 "locked": false,
                 "name": "SW1",
@@ -867,13 +798,8 @@
                 "symbol": ":/symbols/classic/ethernet_switch.svg",
                 "template_id": "b41f555d-3f6f-4249-8042-624da00f1731",
                 "width": 72,
-<<<<<<< HEAD
-                "x": -101,
-                "y": 101,
-=======
-                "x": -228,
-                "y": 158,
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
+                "x": -237,
+                "y": 151,
                 "z": 1
             },
             {
@@ -888,13 +814,8 @@
                     "rotation": 0,
                     "style": "font-family: TypeWriter;font-size: 10.0;font-weight: bold;fill: #000000;fill-opacity: 1.0;",
                     "text": "SW2",
-<<<<<<< HEAD
-                    "x": 17,
-                    "y": -25
-=======
                     "x": 11,
                     "y": 11
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 },
                 "locked": false,
                 "name": "SW2",
@@ -947,21 +868,12 @@
                 "symbol": ":/symbols/classic/ethernet_switch.svg",
                 "template_id": "b41f555d-3f6f-4249-8042-624da00f1731",
                 "width": 72,
-<<<<<<< HEAD
-                "x": 82,
-                "y": 106,
-                "z": 1
-            },
-            {
-                "compute_id": "local",
-=======
                 "x": 66,
                 "y": 160,
                 "z": 1
             },
             {
                 "compute_id": "vm",
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 "console": null,
                 "console_auto_start": false,
                 "console_type": "none",
@@ -977,53 +889,28 @@
                 },
                 "locked": false,
                 "name": "Cloud1",
-<<<<<<< HEAD
-                "node_id": "75d3e664-74bc-40f4-93aa-e42c3dc03c01",
-=======
                 "node_id": "34eda357-addf-4bc9-aee9-8fcb8b51a45a",
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                 "node_type": "cloud",
                 "port_name_format": "Ethernet{0}",
                 "port_segment_size": 0,
                 "properties": {
                     "interfaces": [
                         {
-<<<<<<< HEAD
-                            "name": "Wi-Fi",
-=======
                             "name": "docker0",
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                             "special": true,
                             "type": "ethernet"
                         },
                         {
-<<<<<<< HEAD
-                            "name": "Conexi\u00f3n de red Bluetooth",
-=======
                             "name": "eth0",
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                             "special": false,
                             "type": "ethernet"
                         },
                         {
-<<<<<<< HEAD
-                            "name": "OpenVPN TAP-Windows6",
-=======
                             "name": "eth1",
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                             "special": false,
                             "type": "ethernet"
                         },
                         {
-<<<<<<< HEAD
-                            "name": "Ethernet 3",
-                            "special": false,
-                            "type": "ethernet"
-                        },
-                        {
-                            "name": "Ethernet 5",
-                            "special": false,
-=======
                             "name": "lo",
                             "special": true,
                             "type": "ethernet"
@@ -1031,46 +918,21 @@
                         {
                             "name": "virbr0",
                             "special": true,
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                             "type": "ethernet"
                         }
                     ],
                     "ports_mapping": [
                         {
-<<<<<<< HEAD
-                            "interface": "Conexi\u00f3n de red Bluetooth",
-                            "name": "Conexi\u00f3n de red Bluetooth",
-=======
                             "interface": "eth0",
                             "name": "eth0",
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                             "port_number": 0,
                             "type": "ethernet"
                         },
                         {
-<<<<<<< HEAD
-                            "interface": "OpenVPN TAP-Windows6",
-                            "name": "OpenVPN TAP-Windows6",
-                            "port_number": 1,
-                            "type": "ethernet"
-                        },
-                        {
-                            "interface": "Ethernet 3",
-                            "name": "Ethernet 3",
-                            "port_number": 2,
-                            "type": "ethernet"
-                        },
-                        {
-                            "interface": "Ethernet 5",
-                            "name": "Ethernet 5",
-                            "port_number": 3,
-                            "type": "ethernet"
-=======
                             "interface": "eth1",
                             "name": "eth1",
                             "port_number": 1,
                             "type": "ethernet"
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
                         }
                     ],
                     "remote_console_host": "",
@@ -1081,12 +943,8 @@
                 "symbol": ":/symbols/cloud.svg",
                 "template_id": "39e257dc-8412-3174-b6b3-0ee3ed6a43e9",
                 "width": 159,
-<<<<<<< HEAD
-                "x": -408,
-                "y": -66,
-=======
-                "x": -545,
-                "y": -256,
+                "x": -558,
+                "y": -249,
                 "z": 1
             },
             {
@@ -1155,9 +1013,8 @@
                 "symbol": ":/symbols/classic/ethernet_switch.svg",
                 "template_id": "b41f555d-3f6f-4249-8042-624da00f1731",
                 "width": 72,
-                "x": -504,
-                "y": -79,
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
+                "x": -513,
+                "y": -61,
                 "z": 1
             }
         ]
@@ -1165,9 +1022,5 @@
     "type": "topology",
     "variables": null,
     "version": "2.2.58.1",
-<<<<<<< HEAD
     "zoom": 141
-=======
-    "zoom": 119
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
 }

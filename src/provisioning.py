@@ -1,19 +1,25 @@
 """
-Provisionamiento Day 0 de routers MikroTik.
+Fase 2 — Provisionamiento online Day 0.
 
-Conecta con credenciales por defecto (admin / sin contraseña), identifica
-cada router por la MAC de ether1, asigna su nombre y establece una contraseña
-segura generada aleatoriamente. Guarda las nuevas credenciales en el .env.
+REQUIERE haber ejecutado prep_inventory.py antes (Fase 1).
+
+Conecta a cada router con las credenciales de fábrica (admin / vacía),
+gestiona el prompt de primer arranque de ROS7, identifica el router por
+la MAC de ether1 y aplica la contraseña objetivo que preparó la Fase 1.
 
 Uso:
+    # Lee IPs del inventario automáticamente
+    python -m src.provisioning
+
+    # IPs explícitas
     python -m src.provisioning 192.168.233.130 192.168.233.131 ...
-    python -m src.provisioning --mac-map inventory/mac_map.yml <IPs>
 """
 
 from __future__ import annotations
 
 import argparse
 import logging
+import os
 import sys
 from pathlib import Path
 from typing import Dict, List
@@ -23,7 +29,7 @@ from dotenv import load_dotenv
 
 from .connector import DeviceConnectionError, DeviceConnector
 from .models import MikroTikDevice
-from .utils import configure_logging, generate_secure_password, update_env_file
+from .utils import configure_logging, load_mac_map
 
 logger = logging.getLogger(__name__)
 
@@ -31,25 +37,27 @@ _DEFAULT_USERNAME = "admin"
 _DEFAULT_PASSWORD = ""
 
 
-def load_mac_map(path: str | Path) -> Dict[str, str]:
-    """Carga el fichero mac_map.yml y devuelve {MAC_UPPER: hostname}."""
-    path = Path(path)
+def _ips_from_inventory(path: Path) -> List[str]:
+    """Lee las IPs del inventario YAML sin resolver secretos."""
     if not path.is_file():
-        raise FileNotFoundError(f"Mapa de MACs no encontrado: {path}")
+        raise FileNotFoundError(f"Inventario no encontrado: {path}")
     with path.open("r", encoding="utf-8") as fh:
         data = yaml.safe_load(fh) or {}
-    return {mac.upper(): hostname for mac, hostname in data.get("mac_map", {}).items()}
+    return [entry["ip_address"] for entry in data.get("devices", [])]
 
 
 def provision_device(ip_address: str, mac_map: Dict[str, str]) -> bool:
     """
-    Provisiona un único router.
+    Provisiona un único router MikroTik (Fase 2).
+
+    Conecta con credenciales de fábrica, identifica el router por MAC,
+    y aplica la contraseña objetivo generada por la Fase 1.
 
     :param ip_address: IP de gestión del router.
     :param mac_map: Diccionario {MAC: hostname}.
     :return: True si el provisionamiento tuvo éxito.
     """
-    temp_device = MikroTikDevice(
+    device = MikroTikDevice(
         hostname=ip_address,
         ip_address=ip_address,
         username=_DEFAULT_USERNAME,
@@ -57,9 +65,9 @@ def provision_device(ip_address: str, mac_map: Dict[str, str]) -> bool:
     )
 
     try:
-        with DeviceConnector(temp_device) as conn:
+        with DeviceConnector(device) as conn:
             # 1. Identificar por MAC de ether1
-            mac = temp_device.get_management_mac(conn)
+            mac = device.get_management_mac(conn)
             logger.info("[%s] MAC ether1: %s", ip_address, mac)
 
             hostname = mac_map.get(mac.upper())
@@ -73,22 +81,30 @@ def provision_device(ip_address: str, mac_map: Dict[str, str]) -> bool:
 
             logger.info("[%s] Identificado como: %s", ip_address, hostname)
 
-            # 2. Asignar nombre al router
+            # 2. Leer contraseña objetivo preparada por la Fase 1
+            env_key = f"{hostname}_PASS"
+            target_password = os.environ.get(env_key)
+            if not target_password:
+                logger.error(
+                    "[%s] Variable %s no encontrada en el entorno. "
+                    "¿Ejecutaste prep_inventory.py primero?",
+                    ip_address,
+                    env_key,
+                )
+                return False
+
+            # 3. Aplicar contraseña objetivo (entrecomillada para ROS7)
+            conn.configure([f'/user set admin password="{target_password}"'])
+            logger.info("[%s] Contraseña aplicada desde %s.", ip_address, env_key)
+
+            # 4. Cambiar identidad y actualizar el prompt de Netmiko inmediatamente,
+            #    evitando timeout por cambio de hostname en el canal SSH.
             conn.configure([f"/system identity set name={hostname}"])
+            conn._connection.set_base_prompt()
             logger.info("[%s] Identidad asignada: %s", ip_address, hostname)
 
-            # 3. Generar nueva contraseña y aplicarla
-            new_password = generate_secure_password()
-            conn.configure([f"/user set [find name=admin] password={new_password}"])
-            logger.info("[%s] Contraseña actualizada en el dispositivo.", ip_address)
-
-            # 4. Persistir en .env
-            env_key = f"TFG_{hostname}_PASS"
-            update_env_file(env_key, new_password)
-            logger.info("[%s] .env actualizado → %s", ip_address, env_key)
-
     except DeviceConnectionError as exc:
-        logger.error("[%s] Error de conexión con credenciales por defecto: %s", ip_address, exc)
+        logger.error("[%s] Error de conexión: %s", ip_address, exc)
         return False
     except ValueError as exc:
         logger.error("[%s] No se pudo identificar el dispositivo: %s", ip_address, exc)
@@ -98,7 +114,7 @@ def provision_device(ip_address: str, mac_map: Dict[str, str]) -> bool:
 
 
 def run_provisioning(ips: List[str], mac_map: Dict[str, str]) -> int:
-    """Provisiona cada IP de la lista y devuelve el número de fallos."""
+    """Provisiona cada IP y devuelve el número de fallos."""
     failed = 0
     for ip in ips:
         logger.info("--- Provisionando %s ---", ip)
@@ -109,8 +125,8 @@ def run_provisioning(ips: List[str], mac_map: Dict[str, str]) -> int:
 
 def _parse_args(argv: List[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        prog="tfg-provision",
-        description="Provisionamiento Day 0 de routers MikroTik.",
+        prog="provision",
+        description="Fase 2: provisionamiento online Day 0 de routers MikroTik.",
     )
     parser.add_argument(
         "--mac-map",
@@ -120,6 +136,13 @@ def _parse_args(argv: List[str] | None = None) -> argparse.Namespace:
         help="Ruta al fichero mac_map.yml (por defecto: inventory/mac_map.yml).",
     )
     parser.add_argument(
+        "--inventory",
+        type=Path,
+        default=Path("inventory/devices.yml"),
+        metavar="PATH",
+        help="Inventario del que leer IPs si no se pasan como argumento.",
+    )
+    parser.add_argument(
         "-v",
         "--verbose",
         action="store_true",
@@ -127,9 +150,9 @@ def _parse_args(argv: List[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument(
         "ips",
-        nargs="+",
+        nargs="*",
         metavar="IP",
-        help="Direcciones IP de los routers a provisionar.",
+        help="IPs a provisionar. Si se omite, se leen de --inventory.",
     )
     return parser.parse_args(argv)
 
@@ -145,10 +168,21 @@ def main(argv: List[str] | None = None) -> int:
         logger.error("%s", exc)
         return 1
 
-    logger.info(
-        "Iniciando provisionamiento Day 0 para %d dispositivo(s).", len(args.ips)
-    )
-    return run_provisioning(args.ips, mac_map)
+    ips = args.ips
+    if not ips:
+        try:
+            ips = _ips_from_inventory(args.inventory)
+            logger.info("IPs leídas del inventario: %s", ", ".join(ips))
+        except FileNotFoundError as exc:
+            logger.error("%s", exc)
+            return 1
+
+    if not ips:
+        logger.error("No hay IPs que provisionar.")
+        return 1
+
+    logger.info("Iniciando Fase 2 para %d dispositivo(s).", len(ips))
+    return run_provisioning(ips, mac_map)
 
 
 if __name__ == "__main__":

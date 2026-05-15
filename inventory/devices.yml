@@ -1,52 +1,21 @@
-<<<<<<< HEAD
-# Inventario de dispositivos para automatización.
-#
-# Las contraseñas y usuarios sensibles deben referenciarse como `env:NOMBRE_VAR`
-# y definirse en un fichero `.env` (no versionado).
-
 devices:
-  - hostname: R1
-    type: mikrotik
-    ip_address: 192.168.99.10
-    username: env:TFG_MIKROTIK_USER
-    password: env:TFG_MIKROTIK_PASS
-
-  # Plantillas para iteraciones siguientes (descomentar cuando se levanten):
-  #
-  # - hostname: R2
-  #   type: mikrotik
-  #   ip_address: 192.168.99.11
-  #   username: env:TFG_MIKROTIK_USER
-  #   password: env:TFG_MIKROTIK_PASS
-  #
-  # - hostname: SW1
-  #   type: mikrotik
-  #   ip_address: 192.168.99.20
-  #   username: env:TFG_MIKROTIK_USER
-  #   password: env:TFG_MIKROTIK_PASS
-=======
-devices:
-  - hostname: R1
-    type: mikrotik
-    ip_address: 192.168.233.130
-    username: admin
-    password: env:TFG_MIKROTIK_PASS
-
-  - hostname: R2
-    type: mikrotik
-    ip_address: 192.168.233.131
-    username: admin
-    password: env:TFG_MIKROTIK_PASS
-
-  - hostname: R3
-    type: mikrotik
-    ip_address: 192.168.233.132
-    username: admin
-    password: env:TFG_MIKROTIK_PASS
-
-  - hostname: R4
-    type: mikrotik
-    ip_address: 192.168.233.133
-    username: admin
-    password: env:TFG_MIKROTIK_PASS
->>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
+- hostname: R1
+  ip_address: 192.168.233.130
+  password: env:R1_PASS
+  type: mikrotik
+  username: admin
+- hostname: R2
+  ip_address: 192.168.233.131
+  password: env:R2_PASS
+  type: mikrotik
+  username: admin
+- hostname: R3
+  ip_address: 192.168.233.132
+  password: env:R3_PASS
+  type: mikrotik
+  username: admin
+- hostname: R4
+  ip_address: 192.168.233.133
+  password: env:R4_PASS
+  type: mikrotik
+  username: admin

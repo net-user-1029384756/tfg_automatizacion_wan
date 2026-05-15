@@ -34,3 +34,7 @@ Thumbs.db
 topology/project-files/
 topology/snapshots/
 *.gns3_temporary
+
+# Documentos innecesarios
+DOCUMENTO.md
+GEMINI.md
