@@ -30,6 +30,7 @@ prep              = "src.prep_inventory:main"
 provision         = "src.provisioning:main"
 configure-network = "src.configure_network:main"
 configure-ospf    = "src.configure_ospf:main"
+verify-network    = "src.verify_network:main"
 
 [build-system]
 requires = ["setuptools>=61.0"]
