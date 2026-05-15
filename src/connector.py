@@ -156,7 +156,7 @@ class DeviceConnector:
             self.device.hostname,
             len(commands),
         )
-        return self._connection.send_config_set(commands)
+        return self._connection.send_config_set(commands, cmd_verify=False)
 
     @property
     def is_connected(self) -> bool:
