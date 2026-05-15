@@ -4,7 +4,11 @@ from __future__ import annotations
 
 import pytest
 
+<<<<<<< HEAD
 from tfg_automatizacion_wan.models import (
+=======
+from src.models import (
+>>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
     CiscoDevice,
     MikroTikDevice,
     NetworkDevice,

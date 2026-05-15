@@ -10,11 +10,19 @@ from netmiko.exceptions import (
     NetmikoTimeoutException,
 )
 
+<<<<<<< HEAD
 from tfg_automatizacion_wan.connector import (
     DeviceConnectionError,
     DeviceConnector,
 )
 from tfg_automatizacion_wan.models import MikroTikDevice
+=======
+from src.connector import (
+    DeviceConnectionError,
+    DeviceConnector,
+)
+from src.models import MikroTikDevice
+>>>>>>> ca60712 (feat: establish management network with sw-gest and verify connectivity to R1-R4)
 
 
 @pytest.fixture
