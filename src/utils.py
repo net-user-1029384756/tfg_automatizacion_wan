@@ -6,6 +6,8 @@ from __future__ import annotations
 
 import logging
 import os
+import secrets
+import string
 from pathlib import Path
 from typing import Dict, List, Type
 
@@ -17,6 +19,32 @@ DEVICE_TYPES: Dict[str, Type[NetworkDevice]] = {
     "mikrotik": MikroTikDevice,
     "cisco": CiscoDevice,
 }
+
+
+def generate_secure_password(length: int = 12) -> str:
+    """Genera una contraseña aleatoria segura usando el módulo secrets."""
+    alphabet = string.ascii_letters + string.digits + "!@#$%*"
+    return "".join(secrets.choice(alphabet) for _ in range(length))
+
+
+def update_env_file(key: str, value: str, env_path: str | Path = Path(".env")) -> None:
+    """Actualiza o añade una clave en el fichero .env sin alterar el resto."""
+    env_path = Path(env_path)
+    lines: List[str] = []
+    updated = False
+
+    if env_path.is_file():
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            if line.split("=", 1)[0].strip() == key:
+                lines.append(f"{key}={value}")
+                updated = True
+            else:
+                lines.append(line)
+
+    if not updated:
+        lines.append(f"{key}={value}")
+
+    env_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def configure_logging(level: int = logging.INFO) -> None:

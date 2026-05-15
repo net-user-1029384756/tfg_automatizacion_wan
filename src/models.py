@@ -3,8 +3,12 @@ Módulo de modelos para la automatización de infraestructura de red.
 Define la jerarquía de clases para dispositivos MikroTik y Cisco.
 """
 
+import re
 from abc import ABC, abstractmethod
-from typing import Dict, Any
+from typing import TYPE_CHECKING, Any, Dict
+
+if TYPE_CHECKING:
+    from .connector import DeviceConnector
 
 class NetworkDevice(ABC):
     """Clase base abstracta para cualquier dispositivo de red."""
@@ -42,6 +46,21 @@ class MikroTikDevice(NetworkDevice):
         config = self.connection_params.copy()
         config["device_type"] = "mikrotik_routeros"
         return config
+
+    def get_management_mac(self, connection: "DeviceConnector") -> str:
+        """Devuelve la MAC de ether1 ejecutando /interface/ethernet/print."""
+        output = connection.run("/interface/ethernet/print")
+        mac_pattern = re.compile(
+            r"([0-9A-Fa-f]{2}(?::[0-9A-Fa-f]{2}){5})"
+        )
+        for line in output.splitlines():
+            if re.search(r"\bether1\b", line):
+                match = mac_pattern.search(line)
+                if match:
+                    return match.group(1).upper()
+        raise ValueError(
+            f"No se pudo extraer la MAC de ether1 en {self.hostname}"
+        )
 
 class CiscoDevice(NetworkDevice):
     """Representa un dispositivo Cisco IOS."""
