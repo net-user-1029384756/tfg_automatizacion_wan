@@ -25,9 +25,10 @@ dev = [
 ]
 
 [project.scripts]
-wan      = "src.main:main"
-prep     = "src.prep_inventory:main"
-provision = "src.provisioning:main"
+wan               = "src.main:main"
+prep              = "src.prep_inventory:main"
+provision         = "src.provisioning:main"
+configure-network = "src.configure_network:main"
 
 [build-system]
 requires = ["setuptools>=61.0"]

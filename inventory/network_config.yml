@@ -1,0 +1,76 @@
+# Configuración de red de datos — Fase 4
+#
+# Topología WAN:
+#
+#        R1
+#       /|\
+#      / | \
+#    R2  |  R3
+#     \  |  /
+#      \ | /
+#        R4
+#
+# NOTA: ether1 es la interfaz de gestión (Management) en todos los routers.
+#       Los enlaces de datos comienzan en ether2.
+#
+# ┌─────────────┬────────────────┬──────────────────┬──────────────────┐
+# │ Enlace      │ Red            │ Router A         │ Router B         │
+# ├─────────────┼────────────────┼──────────────────┼──────────────────┤
+# │ R1 - R2     │ 10.0.12.0/30  │ R1 (ether3) .1   │ R2 (ether2) .2   │
+# │ R1 - R3     │ 10.0.13.0/30  │ R1 (ether4) .1   │ R3 (ether2) .2   │
+# │ R1 - R4     │ 10.0.14.0/30  │ R1 (ether5) .1   │ R4 (ether2) .2   │
+# │ R2 - R4     │ 10.0.24.0/30  │ R2 (ether5) .1   │ R4 (ether3) .2   │
+# │ R3 - R4     │ 10.0.34.0/30  │ R3 (ether5) .1   │ R4 (ether4) .2   │
+# ├─────────────┼────────────────┼──────────────────┼──────────────────┤
+# │ LAN R3      │ 192.168.3.0/24 │ R3 (ether4) .1   │ —                │
+# │ LAN R4      │ 192.168.4.0/24 │ R4 (ether5) .1   │ —                │
+# └─────────────┴────────────────┴──────────────────┴──────────────────┘
+
+routers:
+  R1:
+    interfaces:
+      - name: ether3
+        address: 10.0.12.1/30
+        description: "R1 -> R2"
+      - name: ether4
+        address: 10.0.13.1/30
+        description: "R1 -> R3"
+      - name: ether5
+        address: 10.0.14.1/30
+        description: "R1 -> R4"
+
+  R2:
+    interfaces:
+      - name: ether2
+        address: 10.0.12.2/30
+        description: "R2 -> R1"
+      - name: ether5
+        address: 10.0.24.1/30
+        description: "R2 -> R4"
+
+  R3:
+    interfaces:
+      - name: ether2
+        address: 10.0.13.2/30
+        description: "R3 -> R1"
+      - name: ether4
+        address: 192.168.3.1/24
+        description: "R3 LAN"
+      - name: ether5
+        address: 10.0.34.1/30
+        description: "R3 -> R4"
+
+  R4:
+    interfaces:
+      - name: ether2
+        address: 10.0.14.2/30
+        description: "R4 -> R1"
+      - name: ether3
+        address: 10.0.24.2/30
+        description: "R4 -> R2"
+      - name: ether4
+        address: 10.0.34.2/30
+        description: "R4 -> R3"
+      - name: ether5
+        address: 192.168.4.1/24
+        description: "R4 LAN"
